@@ -31,6 +31,3 @@ exclude:
 # Configurações de build (caso use GitHub Actions)
 lsi: false
 incremental: false
-
-staticman:
-  endpoint: https://api.staticman.net/v2/entry/github/comercialsw/nps/main/comments
