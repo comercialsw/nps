@@ -1,6 +1,8 @@
 ---
 permalink: /
+layout: null           # ignora layout padrão do tema
 ---
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,42 +10,51 @@ permalink: /
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pesquisa de Satisfação SMARTWAY</title>
   <style>
-    body { margin: 0; font-family: 'Roboto', sans-serif; background: #f1f3f4; color: #202124; }
-    .form-wrapper { max-width: 600px; margin: 2rem auto; background: #fff; border: 1px solid #dadce0; border-radius: 8px; box-shadow: 0 1px 3px rgba(60,64,67,.15), 0 4px 8px rgba(60,64,67,.15); }
-    .header { padding: 1.5rem; border-bottom: 1px solid #dadce0; text-align: center; }
-    .header img { max-width: 200px; height: auto; margin-bottom: .5rem; }
-    .header h2 { margin: .5rem 0 0; font-size: 1.5rem; font-weight: 500; }
-    .header p { margin: .5rem 0 0; font-size: .95rem; color: #5f6368; }
-    .question { padding: 1.5rem; border-bottom: 1px solid #dadce0; }
-    .question:last-of-type { border-bottom: none; }
-    .question h3 { margin: 0 0 1rem; font-size: 1.1rem; font-weight: 400; color: #202124; }
-    .nps-scale { display: flex; justify-content: space-between; }
-    .nps-scale label { flex: 1; text-align: center; font-size: .9rem; color: #5f6368; cursor: pointer; position: relative; }
-    .nps-scale input[type="radio"] { opacity: 0; position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 100%; width: 100%; cursor: pointer; }
-    .nps-scale span { display: inline-block; width: 2rem; height: 2rem; line-height: 2rem; border: 1px solid #dadce0; border-radius: 50%; background: #fff; transition: background .2s, border-color .2s; }
-    .nps-scale input[type="radio"]:checked + span { background: #1a73e8; border-color: #1a73e8; color: #fff; }
-    textarea { width: 100%; padding: .75rem; font-size: .9rem; line-height: 1.4; border: 1px solid #dadce0; border-radius: 4px; resize: vertical; }
-    .actions { padding: 1.5rem; text-align: center; }
-    .actions button { background: #1a73e8; color: #fff; border: none; border-radius: 4px; padding: .75rem 1.5rem; font-size: 1rem; cursor: pointer; transition: background .2s; }
-    .actions button:hover { background: #1558b0; }
+    /* --- ESTILO --- */
+    body { margin:0;font-family:'Roboto',sans-serif;background:#f1f3f4;color:#202124;}
+    .form-wrapper{max-width:600px;margin:2rem auto;background:#fff;border:1px solid #dadce0;
+                  border-radius:8px;box-shadow:0 1px 3px rgba(60,64,67,.15),0 4px 8px rgba(60,64,67,.15);}
+    .header{padding:1.5rem;border-bottom:1px solid #dadce0;text-align:center;}
+    .header img{max-width:200px;height:auto;margin-bottom:.5rem;}
+    .header h2{margin:.5rem 0 0;font-size:1.5rem;font-weight:500;}
+    .header p{margin:.5rem 0 0;font-size:.95rem;color:#5f6368;}
+    .question{padding:1.5rem;border-bottom:1px solid #dadce0;}
+    .question:last-of-type{border-bottom:none;}
+    .question h3{margin:0 0 1rem;font-size:1.1rem;font-weight:400;color:#202124;}
+    .nps-scale{display:flex;justify-content:space-between;}
+    .nps-scale label{flex:1;text-align:center;font-size:.9rem;color:#5f6368;cursor:pointer;position:relative;}
+    .nps-scale input[type="radio"]{opacity:0;position:absolute;top:0;left:50%;transform:translateX(-50%);
+                                   height:100%;width:100%;cursor:pointer;}
+    .nps-scale span{display:inline-block;width:2rem;height:2rem;line-height:2rem;border:1px solid #dadce0;
+                    border-radius:50%;background:#fff;transition:background .2s,border-color .2s;}
+    .nps-scale input[type="radio"]:checked + span{background:#1a73e8;border-color:#1a73e8;color:#fff;}
+    textarea{width:100%;padding:.75rem;font-size:.9rem;line-height:1.4;border:1px solid #dadce0;border-radius:4px;resize:vertical;}
+    .actions{padding:1.5rem;text-align:center;}
+    .actions button{background:#1a73e8;color:#fff;border:none;border-radius:4px;padding:.75rem 1.5rem;font-size:1rem;
+                    cursor:pointer;transition:background .2s;}
+    .actions button:hover{background:#1558b0;}
   </style>
 </head>
 <body>
   <div class="form-wrapper">
     <div class="header">
       <img src="logo-smartway.jpg" alt="Logo SMARTWAY">
-      <h2>Pesquisa de Satisfação - SMARTWAY</h2>
-      <p>Sua opinião é muito importante para nós! Responda de forma rápida e ajude a melhorar nossos serviços.</p>
+      <h2>Pesquisa de Satisfação&nbsp;-&nbsp;SMARTWAY</h2>
+      <p>Sua opinião é muito importante para nós!</p>
     </div>
 
+    <!-- ===== FORMULÁRIO ===== -->
     <form id="nps-form">
+      <!-- campo oculto obrigatório -->
+      <input type="hidden" name="options[slug]" value="nps">
+      <input type="hidden" name="options[redirect]" value="{{ site.url }}{{ site.baseurl }}/thanks.html">
+
       <div class="question">
-        <h3>De 0 a 10, o quanto você recomendaria a Smartway?</h3>
+        <h3>De 0&nbsp;a&nbsp;10, o quanto você recomendaria a Smartway?</h3>
         <div class="nps-scale">
-          <!-- notas de 0 a 10 -->
           {% for i in (0..10) %}
           <label>
-            <input type="radio" name="nps_score" value="{{ i }}" required>
+            <input type="radio" name="fields[nps_score]" value="{{ i }}" required>
             <span>{{ i }}</span>
           </label>
           {% endfor %}
@@ -52,7 +63,7 @@ permalink: /
 
       <div class="question">
         <h3>Comentários, sugestões e reclamações</h3>
-        <textarea name="comments" rows="5" placeholder="Escreva aqui..." required></textarea>
+        <textarea name="fields[comments]" rows="5" placeholder="Escreva aqui..." required></textarea>
       </div>
 
       <div class="actions">
@@ -62,18 +73,21 @@ permalink: /
   </div>
 
   <script>
-    document.getElementById('nps-form').addEventListener('submit', function(e) {
+    /* ===== ENVIO VIA STATICMAN ===== */
+    document.getElementById('nps-form').addEventListener('submit', async e => {
       e.preventDefault();
-      const data = new FormData(this);
-      fetch('https://api.staticman.net/v3/entry/github/comercialsw/nps/main/comments', {
-        method: 'POST',
-        body: data
-      })
-      .then(res => {
-        if (res.ok) window.location.href = 'thanks.html';
-        else alert('Erro ao enviar. Tente novamente.');
-      })
-      .catch(() => alert('Erro de rede. Verifique o endpoint.'));
+      const data = new FormData(e.target);
+
+      // Debug opcional: ver campos no console
+      // console.log([...data.entries()]);
+
+      const res = await fetch("{{ site.staticman_url }}", { method: "POST", body: data });
+      if (res.ok) {
+        window.location.href = "{{ site.url }}{{ site.baseurl }}/thanks.html";
+      } else {
+        const msg = await res.json().catch(()=>({message:"Erro desconhecido"}));
+        alert("Falha ao enviar: " + msg.message);
+      }
     });
   </script>
 </body>
