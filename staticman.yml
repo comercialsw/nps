@@ -1,20 +1,23 @@
-branch: main
-commitMessage: "Add NPS response"
-format: yaml
-moderation: false
-
+# -------------- COLLECTION --------------
 comments:
   path: "_data/respostas/nps/{year}-{month}-{day}-{timestamp}.yml"
-  extension: yml
-  required:
-    - nps_score
 
-fields:
-  nps_score:
-    type: integer
-    validate: "^[0-9]$|^10$"
-  comments:
-    type: textarea
+  # Campos aceitos no POST
+  allowedFields: ["nps_score", "comments"]
+  requiredFields: ["nps_score"]
 
+  # Formato de saída
+  format: "yaml"
+
+  # Transformações simples
+  transforms:
+    nps_score: "trim"
+
+  # Validações
+  validation:
+    nps_score:
+      rule: "^[0-9]$|^10$"
+
+# -------------- OPÇÕES GERAIS --------------
 options:
-  slug: "nps"
+  slug: "nps"           # aparece no nome do arquivo e ajuda a filtrar
