@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Pesquisa de Satisfação SMARTWAY</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .nps { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .nps label { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>De 0 a 10, o quanto você recomendaria a Smartway para um amigo ou familiar? *</h1>
+  <form id="nps-form">
+    <div class="nps">
+      {% for i in (0..10) %}
+        <label>
+          <input type="radio" name="nps_score" value="{{ i }}" required>
+          {{ i }}
+        </label>
+      {% endfor %}
+    </div>
+
+    <p>
+      <label for="comments">Comentários, sugestões e reclamações sobre sua compra *</label><br/>
+      <textarea name="comments" id="comments" rows="4" required></textarea>
+    </p>
+
+    <!-- redireciona após envio (opcional) -->
+    <input type="hidden" name="options[redirect]" value="thanks.html">
+
+    <button type="submit">Enviar Avaliação</button>
+  </form>
+
+  <script>
+    document.getElementById('nps-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(this);
+      fetch('{{ site.staticman.endpoint }}', {
+        method: 'POST',
+        body: data
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('Obrigado pela sua avaliação!');
+          this.reset();
+        } else {
+          alert('Erro ao enviar. Tente novamente.');
+        }
+      })
+      .catch(() => alert('Erro de rede.'));
+    });
+  </script>
+</body>
+</html>
 
