@@ -1,15 +1,20 @@
-# staticman.yml
-branch: main                     # branch onde os dados serão gravados
-commitMessage: "Add NPS response" 
+branch: main
+commitMessage: "Add NPS response"
 format: yaml
-moderation: false                # false = commit direto; true = abre PR
-allowedFields: ["nps_score","comments"]
+moderation: false
+
+comments:
+  path: "_data/respostas/nps/{year}-{month}-{day}-{timestamp}.yml"
+  extension: yml
+  required:
+    - nps_score
+
 fields:
   nps_score:
     type: integer
-    validate: "^[0-9]$|^10$"     # apenas 0–10
+    validate: "^[0-9]$|^10$"
   comments:
     type: textarea
-options:
-  slug: "nps"                    # cria subpasta em _data/respostas/nps
 
+options:
+  slug: "nps"
