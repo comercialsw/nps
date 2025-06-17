@@ -19,10 +19,6 @@ plugins:
 # Tema
 theme: jekyll-theme-cayman
 
-# Configuração do Staticman
-staticman:
-  endpoint: https://api.staticman.net/v3/entry/github/comercialsw/nps/main
-
 # Outras configurações opcionais
 exclude:
   - node_modules
@@ -31,3 +27,7 @@ exclude:
 # Configurações de build (caso use GitHub Actions)
 lsi: false
 incremental: false
+
+# Configuração do Staticman
+staticman:
+  endpoint: https://api.staticman.net/v3/entry/github/comercialsw/nps/main/comments
