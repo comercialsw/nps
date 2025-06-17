@@ -21,7 +21,7 @@ theme: jekyll-theme-cayman
 
 # Configuração do Staticman
 staticman:
-  endpoint: https://api.staticman.net/v3/entry/github/comercialsw/nps/main/comments
+  endpoint: https://api.staticman.net/v3/entry/github/comercialsw/nps/main
 
 # Outras configurações opcionais
 exclude:
