@@ -65,7 +65,7 @@ permalink: /
     document.getElementById('nps-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const data = new FormData(this);
-      fetch('https://api.staticman.net/v3/entry/github/SEU_USUARIO/SEU_REPO/main/comments', {
+      fetch('https://api.staticman.net/v3/entry/github/comercialsw/nps/main/comments', {
         method: 'POST',
         body: data
       })
