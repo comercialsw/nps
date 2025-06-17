@@ -1,38 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pesquisa de Satisfação SMARTWAY</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    .nps { display: flex; gap: .5rem; flex-wrap: wrap; }
-    .nps label { cursor: pointer; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f5f7fa;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 1.5rem;
+      max-width: 150px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .nps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .nps input[type="radio"] {
+      display: none;
+    }
+    .nps label {
+      flex: 1;
+      text-align: center;
+      margin: 0.25rem;
+      cursor: pointer;
+      background: #e9ecef;
+      border-radius: 4px;
+      padding: 0.5rem 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nps input[type="radio"]:checked + label {
+      background: #007bff;
+      color: #fff;
+    }
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      margin-bottom: 1rem;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
-  <h1>De 0 a 10, o quanto você recomendaria a Smartway para um amigo ou familiar? *</h1>
-  <form id="nps-form">
-    <div class="nps">
-      {% for i in (0..10) %}
-        <label>
-          <input type="radio" name="nps_score" value="{{ i }}" required>
-          {{ i }}
-        </label>
-      {% endfor %}
-    </div>
-
-    <p>
-      <label for="comments">Comentários, sugestões e reclamações sobre sua compra *</label><br/>
-      <textarea name="comments" id="comments" rows="4" required></textarea>
-    </p>
-
-    <!-- redireciona após envio (opcional) -->
-    <input type="hidden" name="options[redirect]" value="thanks.html">
-
-    <button type="submit">Enviar Avaliação</button>
-  </form>
-
+  <div class="container">
+    <img src="logo.png" alt="Logo da Empresa" class="logo">
+    <h1>De 0 a 10, o quanto você recomendaria a Smartway?</h1>
+    <form id="nps-form">
+      <div class="nps">
+        {% for i in (0..10) %}
+        <input type="radio" id="nps-{{i}}" name="nps_score" value="{{i}}" required>
+        <label for="nps-{{i}}">{{i}}</label>
+        {% endfor %}
+      </div>
+      <textarea name="comments" id="comments" rows="4" placeholder="Comentários, sugestões e reclamações" required></textarea>
+      <input type="hidden" name="options[redirect]" value="thanks.html">
+      <button type="submit">Enviar Avaliação</button>
+    </form>
+  </div>
   <script>
     document.getElementById('nps-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -41,17 +104,9 @@
         method: 'POST',
         body: data
       })
-      .then(res => {
-        if (res.ok) {
-          alert('Obrigado pela sua avaliação!');
-          this.reset();
-        } else {
-          alert('Erro ao enviar. Tente novamente.');
-        }
-      })
+      .then(res => res.ok ? window.location.href = 'thanks.html' : alert('Erro ao enviar.'))
       .catch(() => alert('Erro de rede.'));
     });
   </script>
 </body>
 </html>
-
