@@ -1,2 +1,36 @@
+title: SMARTWAY NPS
+description: Plataforma de pesquisas NPS hospedada no GitHub Pages
+baseurl: ""                  
+url: "https://comercialsw.github.io"
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Permalinks “bonitos”
+permalink: /:title/
+
+# Plugins (caso use outros)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Tema
+theme: jekyll-theme-cayman
+
+# Configuração do Staticman
+staticman:
+  endpoint: https://api.staticman.net/v3/entry/github/comercialsw/nps/main/comments
+
+# Outras configurações opcionais
+exclude:
+  - node_modules
+  - vendor
+
+# Configurações de build (caso use GitHub Actions)
+lsi: false
+incremental: false
+
 staticman:
   endpoint: https://api.staticman.net/v2/entry/github/comercialsw/nps/main/comments
